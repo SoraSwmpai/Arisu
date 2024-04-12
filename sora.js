@@ -45,31 +45,31 @@ function updateChatHistory(sender, message) {
   if (!chatHistory[sender]) {
     chatHistory[sender] = [];
   }
-  // Add the message to the sender's chat history
+  
   chatHistory[sender].push(message);
-  // If the chat history exceeds the maximum length of 20 messages, remove the oldest message
+  
   if (chatHistory[sender].length > 20) {
     chatHistory[sender].shift();
   }
 }
 
-// Export function that handles incoming messages
+
 module.exports = sansekai = async (client, m, chatUpdate, store) => {
   try {
-    // If the sender has no chat history, create a new array for the sender
+   
     if (!chatHistory[m.sender]) chatHistory[m.sender] = [];
 
-    // Get the content of the incoming message
+    
     const text = m.text;
     const isCmd2 = text.startsWith("!");
     const command = text.trim().split(/ +/).shift().toLowerCase();
     const args = text.trim().split(/ +/).slice(1);
 
-    // If the message is an OpenAI command, do nothing and return
+    
     if (command === "ai" || command === "openai") {
-      // do nothing, this is to ignore the 'ai' and 'openai' commands
+      
     }
-    // If the message is a command, handle the command
+   
     else if (isCmd2) {
       switch (command) {
         case "test":
@@ -112,7 +112,7 @@ module.exports = sansekai = async (client, m, chatUpdate, store) => {
     }
   } catch (err) {
     // If an error occurs, reply to the incoming message with the error message
-    m.reply(util.format(err));
+    m.reply('Someone tell Sora there is a problem with my AI ~ Arisu')
   }
 };
 
